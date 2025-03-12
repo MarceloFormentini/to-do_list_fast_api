@@ -28,5 +28,4 @@ def users_creator_validator(request: any):
 	response = body_validator.validate(request)
 
 	if not response:
-		print(body_validator.errors)
-		raise HTTPException(status_code=400, detail="Erro")
+		raise HTTPException(status_code=400, detail=body_validator.errors)
