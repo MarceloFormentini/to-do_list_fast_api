@@ -1,3 +1,4 @@
+# WITH
 No Python, a declaração with é usada para simplificar o gerenciamento de recursos, como arquivos, conexões de banco de dados, etc. Ela garante que os recursos sejam corretamente adquiridos e liberados, mesmo que ocorra uma exceção durante a execução do bloco de código.
 
 A declaração with é usada com objetos que implementam os métodos especiais __enter__ e __exit__. O método __enter__ é chamado quando o bloco with é iniciado, e o método __exit__ é chamado quando o bloco with é finalizado, seja por conclusão normal ou por uma exceção.
@@ -21,7 +22,7 @@ with DBConnectionHandler() as db:
 ```
 Aqui, DBConnectionHandler é um gerenciador de contexto que cuida da abertura e fechamento da conexão com o banco de dados. Quando o bloco with é iniciado, o método __enter__ de DBConnectionHandler é chamado, configurando a conexão. Quando o bloco with é finalizado, o método __exit__ é chamado, garantindo que a conexão seja fechada corretamente, mesmo que ocorra uma exceção.
 
--------
+# __init__.py
 O arquivo __init__.py é usado para marcar diretórios como pacotes Python. Sua presença permite que o Python reconheça o diretório como um pacote e possibilita a importação de módulos e subpacotes contidos nele.
 
 Aqui estão algumas finalidades do arquivo __init__.py:
@@ -34,7 +35,7 @@ Aqui estão algumas finalidades do arquivo __init__.py:
 
 4. Agrupar módulos: Ele permite que você agrupe módulos relacionados em um único pacote, facilitando a organização e a manutenção do código.
 
------
+# Anotação Tipo Retorno
 
 ```
 def create(self, http_request: HttpRequest) -> HttpResponse:
@@ -58,3 +59,12 @@ Sem Anotação de Tipo:
 - Ferramentas de Desenvolvimento: Ferramentas de desenvolvimento têm menos informações para fornecer sugestões e detecção de erros.
 
 - Documentação: Outros desenvolvedores podem precisar ler a implementação do método para entender o que ele retorna.
+
+# Exception Handler Global
+
+O FastAPI permite definir exception handlers globais usando @app.exception_handler.
+- Criado o arquivo <code>exception_handler.py</code> no diretorio <code>src\main\exception</code>. Neste arquivo tem um método que recebe o código de erro e uma mensagem do erro.
+- Registrado o handler no FastAPI, arquivo <code>run.py</code>
+  - <code>app.add_exception_handler(HTTPException, http_exception_handler)</code>
+- Sempre que precisar lançar uma exceção usa HTTPException e o handler global cuidará da resposta. Exemplo:
+  - <code>raise HTTPException(status_code=404, detail="User not found")</code>

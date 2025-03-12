@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 # classe responsável por gerencial a conexão com o banco de dados
 class DBConnectionHandler:
 	def __init__(self):
-		self.__connection_string = "postgresql://postgres:postgres@localhost:5432/db_todolist"
+		self.__connection_string = "mysql+pymysql://root:mysql@localhost:3336/db_todolist"
 		self.__engine = self.__create_database_engine()
 		self.session = None
 

@@ -1,4 +1,5 @@
 from cerberus import Validator
+from fastapi import HTTPException
 
 def users_creator_validator(request: any):
 	body_validator = Validator({
@@ -27,4 +28,5 @@ def users_creator_validator(request: any):
 	response = body_validator.validate(request)
 
 	if not response:
-		raise Exception(body_validator.errors)
+		print(body_validator.errors)
+		raise HTTPException(status_code=400, detail="Erro")

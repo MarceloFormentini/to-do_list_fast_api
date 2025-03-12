@@ -46,3 +46,17 @@ class UsersRepository(UsersRepositoryInterface):
 			)
 
 			return user
+
+	def authenticate_user(self, email: str, password: str) -> Users:
+		with DBConnectionHandler() as db:
+			user = (
+				db.session
+				.query(Users)
+				.filter(
+					Users.email == email,
+					Users.password == password
+				)
+				.one_or_none()
+			)
+
+		return user

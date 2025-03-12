@@ -14,3 +14,7 @@ class UsersRepositoryInterface(ABC):
 	@abstractmethod
 	def select_user_email(self, email: str) -> Users:
 		pass
+
+	@abstractmethod
+	def authenticate_user(self, email: str, password: str) -> Users:
+		pass
